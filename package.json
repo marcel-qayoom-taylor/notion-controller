@@ -1,0 +1,22 @@
+{
+  "name": "notion-controller",
+  "version": "1.0.0",
+  "description": "controller for notion",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcel-qayoom-taylor/notion-controller.git"
+  },
+  "author": "Marcel Qayoom-Taylor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcel-qayoom-taylor/notion-controller/issues"
+  },
+  "homepage": "https://github.com/marcel-qayoom-taylor/notion-controller#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
