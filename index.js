@@ -2,11 +2,14 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import { Client } from "@notionhq/client";
 import express from "express";
+import createGymPage from "./src/gym/gym-controller.js";
 
 const app = express();
 const port = 3000;
 const notion = new Client({ auth: process.env.NOTION_KEY });
 const databaseId = process.env.NOTION_DATABASE_ID;
+
+// app.use(express.static("src/gym")); // temp for testing until I use argument based routing
 
 async function addItem(text) {
   try {
@@ -45,26 +48,30 @@ async function getBlock(blockId) {
   console.log(response);
 }
 
-let url = await addItem("Yurts in Big Sur, California");
+let pushUrl = createGymPage("push");
+console.log(`Push url is ${pushUrl}`);
+// let pullUrl = await addItem("Pull Day");
+// let legsUrl = await addItem("Legs Day");
+// let cardioUrl = await addItem("Cardio Day");
 
 app.get("/", (req, res) => {
   res.send("Hello world!");
 });
 
 app.get("/gym/push", (req, res) => {
-  res.redirect(url);
+  // res.redirect(pushUrl);
 });
 
 app.get("/gym/pull", (req, res) => {
-  res.send("Pull day!");
+  res.redirect(pullUrl);
 });
 
 app.get("/gym/legs", (req, res) => {
-  res.send("Legs day!");
+  res.redirect(legsUrl);
 });
 
 app.get("/gym/cardio", (req, res) => {
-  res.send("Cardio day!");
+  res.redirect(cardioUrl);
 });
 
 app.listen(port, () => {
