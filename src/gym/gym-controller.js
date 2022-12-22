@@ -6,7 +6,6 @@ import {
   queryDatabase,
 } from "../notion-controller.js";
 import moment from "moment";
-import express from "express";
 
 const allowedMuscleGroups = ["push", "pull", "legs", "cardio", "other"];
 
