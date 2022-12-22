@@ -25,7 +25,7 @@ export default router.get("/:muscleGroup", async (req, res) => {
     //}
   } catch (error) {
     console.error(error);
-    return res.status(500).send(`Server error: ${error}`);
+    return res.status(500).send(error);
   }
 });
 
