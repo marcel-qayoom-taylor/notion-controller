@@ -28,11 +28,9 @@ export default async function createGymPage(muscleGroup) {
   console.log("contents modified");
 
   // Create a new page and set page properties
-  let newPage = await addItem(titleCase(muscleGroup));
-  console.log("new page created");
-
-  await updatePage(
-    newPage.id,
+  let newPage = await addItem(
+    titleCase(muscleGroup),
+    calculateEmoji(muscleGroup),
     {
       Tags: {
         multi_select: [
@@ -46,9 +44,28 @@ export default async function createGymPage(muscleGroup) {
           start: moment().format("YYYY-MM-DD"),
         },
       },
-    },
-    calculateEmoji(muscleGroup)
+    }
   );
+  console.log("new page created");
+
+  // await updatePage(
+  //   newPage.id,
+  //   {
+  //     Tags: {
+  //       multi_select: [
+  //         {
+  //           name: muscleGroup,
+  //         },
+  //       ],
+  //     },
+  //     Date: {
+  //       date: {
+  //         start: moment().format("YYYY-MM-DD"),
+  //       },
+  //     },
+  //   },
+  //   calculateEmoji(muscleGroup)
+  // );
   console.log("page updated");
 
   // Pre-fill the previous page's data

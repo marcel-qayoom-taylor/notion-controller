@@ -5,20 +5,22 @@ import { Client } from "@notionhq/client";
 const notion = new Client({ auth: process.env.NOTION_KEY });
 const databaseId = process.env.NOTION_DATABASE_ID;
 
-export async function addItem(text) {
+export async function addItem(name, icon, extraProperties) {
   try {
     const response = await notion.pages.create({
       parent: { database_id: databaseId },
+      icon: icon,
       properties: {
         title: {
           title: [
             {
               text: {
-                content: text,
+                content: name,
               },
             },
           ],
         },
+        ...extraProperties,
       },
     });
     console.log("Success! Entry added.");
