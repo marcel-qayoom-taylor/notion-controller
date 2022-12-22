@@ -9,6 +9,16 @@ export default async function createGymPage(muscleGroup) {
     );
     return "/";
   }
-  let response = await addItem(muscleGroup);
+  console.log(`Adding page ${titleCase(muscleGroup)}`);
+  let response = await addItem(titleCase(muscleGroup));
   return response.url;
+}
+
+function titleCase(message) {
+  let newMessage = message.toLowerCase().split(" ");
+  for (let i = 0; i < newMessage.length; i++) {
+    newMessage[i] =
+      newMessage[i].charAt(0).toUpperCase() + newMessage[i].slice(1);
+  }
+  return newMessage.join(" ");
 }
