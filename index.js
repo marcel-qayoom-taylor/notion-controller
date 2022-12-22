@@ -22,7 +22,7 @@ app.get("/gym/:muscleGroup", async (req, res) => {
 app.get("/favicon.ico", (req, res) => res.status(204));
 
 app.get("/", (req, res) => {
-  res.send("Hello world!");
+  res.sendFile("/index.html");
 });
 
 app.listen(port, () => {
