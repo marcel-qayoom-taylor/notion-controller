@@ -19,6 +19,10 @@ app.get("/gym/:muscleGroup", async (req, res) => {
   }
 });
 
+app.get("/favicon.ico", (req, res) => {
+  res.send("favicon");
+});
+
 app.get("/", (req, res) => {
   res.send("Hello world!");
 });
