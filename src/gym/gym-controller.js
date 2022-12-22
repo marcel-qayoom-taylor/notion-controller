@@ -17,7 +17,7 @@ const allowedMuscleGroups = ["push", "pull", "legs", "cardio", "other"];
  *
  * @return createGymPage | empty
  */
-export default router.get("/:muscleGroup", async (req, res) => {
+router.get("/:muscleGroup", async (req, res) => {
   try {
     if (req.url != "/favicon.ico") {
       let url = await createGymPage(req.params.muscleGroup);
@@ -29,7 +29,7 @@ export default router.get("/:muscleGroup", async (req, res) => {
   }
 });
 
-export async function createGymPage(muscleGroup) {
+export default async function createGymPage(muscleGroup) {
   if (!allowedMuscleGroups.includes(muscleGroup)) {
     console.error(
       `Muscle group of ${muscleGroup} is not in ${allowedMuscleGroups}`

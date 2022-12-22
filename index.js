@@ -6,7 +6,18 @@ import createGymPage from "./src/gym/gym-controller.js";
 const app = express();
 const port = 3000;
 
-app.use("/gym", createGymPage);
+// app.use("/gym", createGymPage);
+app.get("/gym/:muscleGroup", async (req, res) => {
+  try {
+    if (req.url != "/favicon.ico") {
+      let url = await createGymPage(req.params.muscleGroup);
+      res.redirect(url);
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send(error);
+  }
+});
 
 app.get("/favicon.ico", (req, res) => res.status(204));
 
