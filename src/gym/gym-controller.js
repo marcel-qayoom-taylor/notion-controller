@@ -19,7 +19,6 @@ const allowedMuscleGroups = ["push", "pull", "legs", "cardio", "other"];
  */
 export default router.get("/:muscleGroup", async (req, res) => {
   try {
-    console.log(`Req url: ${req.url}`);
     if (req.url != "/favicon.ico") {
       let url = await createGymPage(req.params.muscleGroup);
       res.redirect(url);
