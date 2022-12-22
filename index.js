@@ -8,6 +8,8 @@ const port = 3000;
 
 app.use("/gym", createGymPage);
 
+app.get("/favicon.ico", (req, res) => res.status(204));
+
 app.get("/", (req, res) => {
   res.send("Hello world!");
 });
