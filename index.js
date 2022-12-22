@@ -2,8 +2,6 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import createGymPage from "./src/gym/gym-controller.js";
-import path from "path";
-import * as favicon from "serve-favicon";
 
 const app = express();
 const port = 3000;
