@@ -16,42 +16,46 @@ export default async function createGymPage(muscleGroup) {
     return "/";
   }
 
-  // Get the last page
-  let previousPage = await getPreviousWorkoutPage(muscleGroup);
-  console.log("previous page found");
+  try {
+    // Get the last page
+    let previousPage = await getPreviousWorkoutPage(muscleGroup);
+    console.log("previous page found");
 
-  // Get contents of last page and modify them to show it was the previous
-  let contents = await getBlockById(previousPage.id);
-  console.log("contents found");
-  let customContents = await previousify(contents.results);
-  console.log("contents modified");
+    // Get contents of last page and modify them to show it was the previous
+    let contents = await getBlockById(previousPage.id);
+    console.log("contents found");
+    let customContents = await previousify(contents.results);
+    console.log("contents modified");
 
-  // Create a new page and set page properties
-  let newPage = await addItem(
-    titleCase(muscleGroup),
-    calculateEmoji(muscleGroup),
-    {
-      Tags: {
-        multi_select: [
-          {
-            name: muscleGroup,
-          },
-        ],
-      },
-      Date: {
-        date: {
-          start: moment().format("YYYY-MM-DD"),
+    // Create a new page and set page properties
+    let newPage = await addItem(
+      titleCase(muscleGroup),
+      calculateEmoji(muscleGroup),
+      {
+        Tags: {
+          multi_select: [
+            {
+              name: muscleGroup,
+            },
+          ],
         },
-      },
-    }
-  );
-  console.log("new page created with icon and tags");
+        Date: {
+          date: {
+            start: moment().format("YYYY-MM-DD"),
+          },
+        },
+      }
+    );
+    console.log("new page created with icon and tags");
 
-  // Pre-fill the previous page's data
-  await appendBlockChildren(newPage.id, customContents);
-  console.log("children appended");
+    // Pre-fill the previous page's data
+    await appendBlockChildren(newPage.id, customContents);
+    console.log("children appended");
 
-  return newPage.url;
+    return newPage.url;
+  } catch (error) {
+    console.error(error.body);
+  }
 }
 
 // Helper function to Title Case names
@@ -78,8 +82,12 @@ async function getPreviousWorkoutPage(muscleGroup) {
       direction: "descending",
     },
   ];
-  let query = await queryDatabase(filter, sorts);
-  return query.results?.length > 0 ? query.results[0] : null;
+  try {
+    let query = await queryDatabase(filter, sorts);
+    return query.results?.length > 0 ? query.results[0] : null;
+  } catch (error) {
+    console.error(error.body);
+  }
 }
 
 function calculateEmoji(muscleGroup) {

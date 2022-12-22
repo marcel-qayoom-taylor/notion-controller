@@ -31,25 +31,37 @@ export async function addItem(name, icon, extraProperties) {
 }
 
 export async function getBlockById(blockId) {
-  const response = await notion.blocks.children.list({
-    block_id: blockId,
-    page_size: 50,
-  });
-  return response;
+  try {
+    const response = await notion.blocks.children.list({
+      block_id: blockId,
+      page_size: 50,
+    });
+    return response;
+  } catch (error) {
+    console.error(error.body);
+  }
 }
 
 export async function appendBlockChildren(blockId, children) {
-  const response = await notion.blocks.children.append({
-    block_id: blockId,
-    children: children,
-  });
+  try {
+    const response = await notion.blocks.children.append({
+      block_id: blockId,
+      children: children,
+    });
+  } catch (error) {
+    console.error(error.body);
+  }
 }
 
 export async function queryDatabase(filter, sorts) {
-  const response = await notion.databases.query({
-    database_id: databaseId,
-    filter: filter,
-    sorts: sorts,
-  });
-  return response;
+  try {
+    const response = await notion.databases.query({
+      database_id: databaseId,
+      filter: filter,
+      sorts: sorts,
+    });
+    return response;
+  } catch (error) {
+    console.error(error.body);
+  }
 }
