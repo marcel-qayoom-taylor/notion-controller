@@ -3,22 +3,15 @@ dotenv.config();
 import express from "express";
 import createGymPage from "./src/gym/gym-controller.js";
 import path from "path";
+import * as favicon from "serve-favicon";
 
 const app = express();
 const port = 3000;
-app.use(express.static("public"));
-app.use(ignoreFavicon);
-
-function ignoreFavicon(req, res, next) {
-  if (req.originalUrl.includes("favicon.ico")) {
-    res.status(204).end();
-  }
-  next();
-}
 
 // app.use("/gym", createGymPage);
 app.get("/gym/:muscleGroup", async (req, res) => {
   try {
+    console.log(req.url);
     if (req.url != "/favicon.ico") {
       let url = await createGymPage(req.params.muscleGroup);
       res.redirect(url);
