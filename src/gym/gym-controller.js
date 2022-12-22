@@ -6,12 +6,31 @@ import {
   appendBlockChildren,
   queryDatabase,
 } from "../notion-controller.js";
-
 import moment from "moment";
+import express from "express";
+const router = express.Router();
 
 const allowedMuscleGroups = ["push", "pull", "legs", "cardio", "other"];
 
-export default async function createGymPage(muscleGroup) {
+/**
+ * Create Notion Pages
+ *
+ * @return createGymPage | empty
+ */
+export default router.get("/:muscleGroup", async (req, res) => {
+  try {
+    console.log(`Req url: ${req.url}`);
+    if (req.url != "/favicon.ico") {
+      let url = await createGymPage(req.params.muscleGroup);
+      res.redirect(url);
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Server error");
+  }
+});
+
+export async function createGymPage(muscleGroup) {
   if (!allowedMuscleGroups.includes(muscleGroup)) {
     console.error(
       `Muscle group of ${muscleGroup} is not in ${allowedMuscleGroups}`

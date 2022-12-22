@@ -6,15 +6,10 @@ import createGymPage from "./src/gym/gym-controller.js";
 const app = express();
 const port = 3000;
 
+app.use("/gym", createGymPage);
+
 app.get("/", (req, res) => {
   res.send("Hello world!");
-});
-
-app.get("/gym/:muscleGroup", async (req, res) => {
-  if (req.url != "/favicon.ico") {
-    let url = await createGymPage(req.params.muscleGroup);
-    res.redirect(url);
-  }
 });
 
 app.listen(port, () => {
