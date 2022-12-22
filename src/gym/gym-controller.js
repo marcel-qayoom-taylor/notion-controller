@@ -1,10 +1,13 @@
 import {
   addItem,
+  updatePage,
   getPageById,
   getBlockById,
   appendBlockChildren,
   queryDatabase,
 } from "../notion-controller.js";
+
+import moment from "moment";
 
 const allowedMuscleGroups = ["push", "pull", "legs", "cardio", "other"];
 
@@ -25,7 +28,29 @@ export default async function createGymPage(muscleGroup) {
 
   // Create a new page and pre-fill the previous page's data
   let newPage = await addItem(titleCase(muscleGroup));
+
+  updatePage(
+    newPage.id,
+    {
+      Tags: {
+        multi_select: [
+          {
+            name: muscleGroup,
+          },
+        ],
+      },
+      Date: {
+        date: {
+          start: moment().format("YYYY-MM-DD"),
+        },
+      },
+    },
+    calculateEmoji(muscleGroup)
+  );
+
   appendBlockChildren(newPage.id, customContents);
+
+  // Set page properties
 
   return newPage.url;
 }
@@ -55,6 +80,21 @@ async function getPreviousWorkoutPage(muscleGroup) {
   ];
   let query = await queryDatabase(filter, sorts);
   return query.results?.length > 0 ? query.results[0] : null;
+}
+
+function calculateEmoji(muscleGroup) {
+  let emoji = {
+    type: "emoji",
+    emoji: null,
+  };
+  let workoutEmojis = {
+    push: "🧿",
+    pull: "🦾",
+    legs: "🏋️‍♂️",
+    cardio: "🏃‍♂️",
+  };
+  emoji["emoji"] = workoutEmojis[muscleGroup];
+  return emoji;
 }
 
 // the following function applies styling to make it obvious that the injected content is from the previous page
