@@ -6,7 +6,6 @@ import createGymPage from "./src/gym/gym-controller.js";
 const app = express();
 const port = 3000;
 
-// app.use("/gym", createGymPage);
 app.get("/gym/:muscleGroup", async (req, res) => {
   try {
     console.log(req.url);
@@ -20,9 +19,9 @@ app.get("/gym/:muscleGroup", async (req, res) => {
   }
 });
 
-app.get("/favicon.ico", (req, res) => {
-  res.send("favicon");
-});
+// app.get("/favicon.ico", (req, res) => {
+//   res.send("favicon");
+// });
 
 app.get("/", (req, res) => {
   res.send("Hello world!");

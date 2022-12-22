@@ -1,33 +1,14 @@
 import {
   addItem,
   updatePage,
-  getPageById,
   getBlockById,
   appendBlockChildren,
   queryDatabase,
 } from "../notion-controller.js";
 import moment from "moment";
 import express from "express";
-const router = express.Router();
 
 const allowedMuscleGroups = ["push", "pull", "legs", "cardio", "other"];
-
-/**
- * Create Notion Pages
- *
- * @return createGymPage | empty
- */
-// router.get("/:muscleGroup", async (req, res) => {
-//   try {
-//     if (req.url != "/favicon.ico") {
-//       let url = await createGymPage(req.params.muscleGroup);
-//       res.redirect(url);
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     return res.status(500).send(error);
-//   }
-// });
 
 export default async function createGymPage(muscleGroup) {
   if (!allowedMuscleGroups.includes(muscleGroup)) {
