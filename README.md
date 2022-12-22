@@ -19,7 +19,7 @@ This is a passion project that I created to automate and amplify my usage of [No
 
 ### The problem
 
-As a power user of notion, I have noticed many limitations in the current version (at the time of writing) of the software. Some of which include clunky multi-page navigation (especially mobile), minimal horizontal layout capabilities and minimal automation opportunities.
+As a strong user of notion, I have noticed many limitations in the current version (at the time of writing) of the software. Some of which include clunky multi-page navigation (especially mobile), minimal horizontal layout capabilities and minimal automation opportunities.
 
 I wanted to create a controller that allowed me to tackle some of these problems. As I use Notion every day, I've designed this project to be long term so that I can add functionality for different use-cases over time.
 
@@ -39,29 +39,24 @@ I wanted a solution where I could tap one button and a new page would be created
 
 ### Built with
 
-- Semantic HTML5 markup
-- CSS custom properties
-- SCSS 
-- Flexbox
-- Mobile-first workflow
+- Javascript
+- Notion API
+- NodeJS
+- Express 
+- Vercel
 
 ### What I learned
 
-How to take advantage of SCSS' useful nesting and variable features. 
+- How to deploy on Vercel!
+- Conditional routing using Express
 
 ### Continued development
 
-In future projects, I would like to be able to implement SCSS syntax faster and more accurately. I would also like to be able to incorporate mixins throughout. 
+I will be using this project as a controller for any future Notion automations that I want to build. 
 
-### Useful resources
-
-- [CSS Referemnce](https://www.w3schools.com/cssref/) - W3Schools helped me a lot as it was my main reference for css syntax
+The next iteration of this would be to track differences in set/rep/weight each session and inject that into the gym diary entry. E.g. if I increase my weight on an exercise by 2kg, the automation would inject a "+2kg!" next to the exercise. Perhaps it could also track improvements long term and show in a graph.
 
 ## Author
 
-- Frontend Mentor - [@Marcelqayoomtaylor135](https://www.frontendmentor.io/profile/Marcelqayoomtaylor135)
+- LinkedIn - [@marcelqayoomtaylor](https://www.linkedin.com/in/marcelqayoomtaylor/)
 - Twitter - [@marcelqtaylor](https://www.twitter.com/marcelqtaylor)
-
-## Acknowledgments
-
-Thank you for the challenge and design Frontend Mentor! (https://www.frontendmentor.io/)
