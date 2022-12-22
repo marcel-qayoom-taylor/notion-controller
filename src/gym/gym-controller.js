@@ -2,6 +2,7 @@ import {
   addItem,
   getPageById,
   getBlockById,
+  appendBlockChildren,
   queryDatabase,
 } from "../notion-controller.js";
 
@@ -14,18 +15,19 @@ export default async function createGymPage(muscleGroup) {
     );
     return "/";
   }
+
+  // Get the last page
   let previousPage = await getPreviousWorkoutPage(muscleGroup);
+
+  // Get contents of last page and modify them to show it was the previous
   let contents = await getBlockById(previousPage.id);
-  console.log(`CONTENTS OF MOST RECENT PAGE: ${JSON.stringify(contents)}`);
-  // create new page
+  let customContents = await previousify(contents.results);
+
+  // Create a new page and pre-fill the previous page's data
   let newPage = await addItem(titleCase(muscleGroup));
-  // newPage.update(contents)
-  // fill new page with previous contents
-  return "/";
+  appendBlockChildren(newPage.id, customContents);
 
-  // console.log(`Adding page ${titleCase(muscleGroup)}`);
-
-  // return response.url;
+  return newPage.url;
 }
 
 function titleCase(message) {
@@ -53,4 +55,20 @@ async function getPreviousWorkoutPage(muscleGroup) {
   ];
   let query = await queryDatabase(filter, sorts);
   return query.results?.length > 0 ? query.results[0] : null;
+}
+
+// the following function applies styling to make it obvious that the injected content is from the previous page
+async function previousify(contents) {
+  console.log(contents.length);
+  for (let block in contents) {
+    if (contents[block]?.type === "bulleted_list_item") {
+      contents[block]["bulleted_list_item"]["rich_text"][0]["annotations"][
+        "italic"
+      ] = true;
+      contents[block]["bulleted_list_item"]["rich_text"][0]["annotations"][
+        "color"
+      ] = "gray";
+    }
+  }
+  return contents;
 }

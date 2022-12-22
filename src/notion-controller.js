@@ -42,6 +42,14 @@ export async function getBlockById(blockId) {
   return response;
 }
 
+export async function appendBlockChildren(blockId, children) {
+  const response = await notion.blocks.children.append({
+    block_id: blockId,
+    children: children,
+  });
+  console.log(response);
+}
+
 export async function queryDatabase(filter, sorts) {
   const response = await notion.databases.query({
     database_id: databaseId,
