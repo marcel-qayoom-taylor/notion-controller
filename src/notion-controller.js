@@ -30,11 +30,6 @@ export async function addItem(name, icon, extraProperties) {
   }
 }
 
-export async function getPageById(pageId) {
-  const response = await notion.pages.retrieve({ page_id: pageId });
-  return response;
-}
-
 export async function getBlockById(blockId) {
   const response = await notion.blocks.children.list({
     block_id: blockId,
