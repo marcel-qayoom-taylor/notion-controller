@@ -1,6 +1,5 @@
 import {
   addItem,
-  updatePage,
   getBlockById,
   appendBlockChildren,
   queryDatabase,
@@ -46,27 +45,7 @@ export default async function createGymPage(muscleGroup) {
       },
     }
   );
-  console.log("new page created");
-
-  // await updatePage(
-  //   newPage.id,
-  //   {
-  //     Tags: {
-  //       multi_select: [
-  //         {
-  //           name: muscleGroup,
-  //         },
-  //       ],
-  //     },
-  //     Date: {
-  //       date: {
-  //         start: moment().format("YYYY-MM-DD"),
-  //       },
-  //     },
-  //   },
-  //   calculateEmoji(muscleGroup)
-  // );
-  console.log("page updated");
+  console.log("new page created with icon and tags");
 
   // Pre-fill the previous page's data
   await appendBlockChildren(newPage.id, customContents);

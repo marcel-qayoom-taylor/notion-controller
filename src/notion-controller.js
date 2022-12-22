@@ -58,12 +58,3 @@ export async function queryDatabase(filter, sorts) {
   });
   return response;
 }
-
-export async function updatePage(pageId, properties, icon) {
-  const response = await notion.pages.update({
-    page_id: pageId,
-    icon: icon,
-    properties: properties,
-  });
-  return response;
-}
