@@ -39,15 +39,19 @@ export default async function createGymPage(muscleGroup) {
 
   // Get the last page
   let previousPage = await getPreviousWorkoutPage(muscleGroup);
+  console.log("previous page found");
 
   // Get contents of last page and modify them to show it was the previous
   let contents = await getBlockById(previousPage.id);
+  console.log("contents found");
   let customContents = await previousify(contents.results);
+  console.log("contents modified");
 
   // Create a new page and set page properties
   let newPage = await addItem(titleCase(muscleGroup));
+  console.log("new page created");
 
-  updatePage(
+  await updatePage(
     newPage.id,
     {
       Tags: {
@@ -65,9 +69,11 @@ export default async function createGymPage(muscleGroup) {
     },
     calculateEmoji(muscleGroup)
   );
+  console.log("page updated");
 
   // Pre-fill the previous page's data
-  appendBlockChildren(newPage.id, customContents);
+  await appendBlockChildren(newPage.id, customContents);
+  console.log("children appended");
 
   return newPage.url;
 }
