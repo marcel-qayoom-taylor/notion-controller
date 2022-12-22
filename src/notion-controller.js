@@ -29,15 +29,24 @@ export async function addItem(text) {
   }
 }
 
-export async function getPage(pageId) {
+export async function getPageById(pageId) {
   const response = await notion.pages.retrieve({ page_id: pageId });
   return response;
 }
 
-export async function getBlock(blockId) {
+export async function getBlockById(blockId) {
   const response = await notion.blocks.children.list({
     block_id: blockId,
     page_size: 50,
+  });
+  return response;
+}
+
+export async function queryDatabase(filter, sorts) {
+  const response = await notion.databases.query({
+    database_id: databaseId,
+    filter: filter,
+    sorts: sorts,
   });
   return response;
 }
