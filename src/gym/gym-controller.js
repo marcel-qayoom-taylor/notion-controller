@@ -19,13 +19,13 @@ const allowedMuscleGroups = ["push", "pull", "legs", "cardio", "other"];
  */
 export default router.get("/:muscleGroup", async (req, res) => {
   try {
-    if (req.url != "/favicon.ico") {
-      let url = await createGymPage(req.params.muscleGroup);
-      res.redirect(url);
-    }
+    //if (req.url != "/favicon.ico") {
+    let url = await createGymPage(req.params.muscleGroup);
+    res.redirect(url);
+    //}
   } catch (error) {
     console.error(error);
-    return res.status(500).send("Server error");
+    return res.status(500).send(`Server error: ${error}`);
   }
 });
 
