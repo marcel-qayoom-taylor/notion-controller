@@ -47,7 +47,6 @@ export async function appendBlockChildren(blockId, children) {
     block_id: blockId,
     children: children,
   });
-  console.log(response);
 }
 
 export async function queryDatabase(filter, sorts) {
@@ -65,6 +64,5 @@ export async function updatePage(pageId, properties, icon) {
     icon: icon,
     properties: properties,
   });
-  console.log(response);
   return response;
 }

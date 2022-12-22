@@ -26,7 +26,7 @@ export default async function createGymPage(muscleGroup) {
   let contents = await getBlockById(previousPage.id);
   let customContents = await previousify(contents.results);
 
-  // Create a new page and pre-fill the previous page's data
+  // Create a new page and set page properties
   let newPage = await addItem(titleCase(muscleGroup));
 
   updatePage(
@@ -48,13 +48,13 @@ export default async function createGymPage(muscleGroup) {
     calculateEmoji(muscleGroup)
   );
 
+  // Pre-fill the previous page's data
   appendBlockChildren(newPage.id, customContents);
-
-  // Set page properties
 
   return newPage.url;
 }
 
+// Helper function to Title Case names
 function titleCase(message) {
   let newMessage = message.toLowerCase().split(" ");
   for (let i = 0; i < newMessage.length; i++) {
@@ -65,7 +65,7 @@ function titleCase(message) {
 }
 
 async function getPreviousWorkoutPage(muscleGroup) {
-  console.log(`Looking for ${muscleGroup}`);
+  console.log(`Finding previous page for ${muscleGroup}`);
   let filter = {
     property: "Tags",
     multi_select: {

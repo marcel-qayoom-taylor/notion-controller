@@ -11,8 +11,10 @@ app.get("/", (req, res) => {
 });
 
 app.get("/gym/:muscleGroup", async (req, res) => {
-  let url = await createGymPage(req.params.muscleGroup);
-  res.redirect(url);
+  if (req.url != "/favicon.ico") {
+    let url = await createGymPage(req.params.muscleGroup);
+    res.redirect(url);
+  }
 });
 
 app.listen(port, () => {
