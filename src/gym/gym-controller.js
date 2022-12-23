@@ -4,7 +4,7 @@ import {
   appendBlockChildren,
   queryDatabase,
 } from "../notion-controller.js";
-import moment from "moment";
+import moment from "moment-timezone";
 
 const allowedMuscleGroups = ["push", "pull", "legs", "cardio", "other"];
 
@@ -41,7 +41,7 @@ export default async function createGymPage(muscleGroup) {
         },
         Date: {
           date: {
-            start: moment().format("YYYY-MM-DD"),
+            start: moment.tz("Australia/Sydney").format("YYYY-MM-DD"),
           },
         },
       }
