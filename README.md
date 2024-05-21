@@ -31,9 +31,6 @@ I wanted a solution where I could tap one button and a new page would be created
 https://user-images.githubusercontent.com/48072798/209255583-16caf174-0df3-406e-a832-621ad9d71f8f.mp4
 
 
-### Links
-- Live Site URL: [Live Site](https://notion-controller.vercel.app/) (note that this is configured to my notion so it won't work for you... yet 😉)
-
 ## My process
 
 ### Built with
